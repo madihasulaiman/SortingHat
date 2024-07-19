@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
+
 from sklearn.feature_selection import SelectKBest, chi2, RFE
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
