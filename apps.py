@@ -103,9 +103,9 @@ def predict_house(input_data):
         votes[prediction[0]] += 1
 
     final_house = max(votes, key=votes.get)
-    percent_votes = {house: (votes[house] / sum(votes.values())) * 100 for house in votes}
+    percent_votes = (votes[final_house] / sum(votes.values())) * 100
 
-    return final_house, percent_votes[final_house]
+    return final_house, percent_votes
 
 # Streamlit interface
 st.title("Hogwarts House Sorting")
@@ -131,9 +131,8 @@ input_data = [
 ]
 
 if st.button("Predict House"):
-    if all(input_data) is not None:
+    if None not in input_data:
         final_house, percent_votes = predict_house(input_data)
         st.write(f"The new data is classified into '{final_house}' house with {percent_votes:.2f}% votes.")
     else:
         st.error("Please fill in all the fields.")
-
