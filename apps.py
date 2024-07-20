@@ -36,7 +36,7 @@ data_set['Faculty'] = data_set['Faculty'].map(faculty_mapping)
 
 # Separate numeric and categorical columns
 numeric_columns = ['Personality Traits', 'Behavioural Traits', 'Hobbies', 'Academic Performance',
-                   'Co-curriculum Activities', 'Leadership', 'Estimated Income']
+                   'Co-curriculum Activities', 'Leadership']
 categorical_columns = ['Hogwarts House']
 
 # Separate features and target variable
@@ -58,7 +58,7 @@ scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
 
 # Apply SelectKBest with chi-squared test
-k = 5
+k = 4
 select_k_best = SelectKBest(score_func=chi2, k=k)
 X_new = select_k_best.fit_transform(X_scaled, y.values.ravel())
 
@@ -69,7 +69,7 @@ selected_feature_names = feature_names[selected_features]
 
 # Apply RFE
 model = LogisticRegression(max_iter=1000)
-rfe = RFE(model, n_features_to_select=5)
+rfe = RFE(model, n_features_to_select=4)
 rfe.fit(X_new, y.values.ravel())
 
 # Get the selected features from RFE
@@ -81,7 +81,7 @@ X_final = X_scaled[:, selected_features][:, rfe_selected_features]
 
 # Initialize classifiers
 classifiers = {
-    "Random Forest": RandomForestClassifier(n_estimators=7, criterion='entropy', random_state=7),
+    "Random Forest": RandomForestClassifier(n_estimators=6, criterion='entropy', random_state=6),
     "Logistic Regression": LogisticRegression(max_iter=1000),
     "Decision Tree": tree.DecisionTreeClassifier(),
 }
@@ -117,7 +117,6 @@ hobbies = st.selectbox("Hobbies", list(hobbies_mapping.keys()))
 academic_performance = st.selectbox("Academic Performance", list(academic_mapping.keys()))
 co_curriculum_activities = st.selectbox("Co-curriculum Activities", list(cocuriculum_mapping.keys()))
 leadership = st.selectbox("Leadership", list(leadership_mapping.keys()))
-estimated_income = st.selectbox("Estimated Income", list(income_mapping.keys()))
 
 # Convert inputs to numeric
 input_data = [
@@ -126,8 +125,7 @@ input_data = [
     hobbies_mapping[hobbies],
     academic_mapping[academic_performance],
     cocuriculum_mapping[co_curriculum_activities],
-    leadership_mapping[leadership],
-    income_mapping[estimated_income]
+    leadership_mapping[leadership]
 ]
 
 if st.button("Predict House"):
