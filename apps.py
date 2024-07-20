@@ -81,7 +81,7 @@ X_final = X_scaled[:, selected_features][:, rfe_selected_features]
 
 # Initialize classifiers
 classifiers = {
-    "Random Forest": RandomForestClassifier(n_estimators=6, criterion='entropy', random_state=0),
+    "Random Forest": RandomForestClassifier(n_estimators=6, criterion='entropy', random_state=42),
     "Logistic Regression": LogisticRegression(max_iter=1000),
     "Decision Tree": tree.DecisionTreeClassifier(),
 }
