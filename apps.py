@@ -108,7 +108,7 @@ def predict_house(input_data):
     return final_house, percent_votes
 
 # Streamlit interface
-st.title("Hogwarts House Sorting")
+st.title("Hogwarts House Sorting Hat")
 
 # Input fields for the user
 personality_traits = st.selectbox("Personality Traits", list(personality_traits_mapping.keys()))
