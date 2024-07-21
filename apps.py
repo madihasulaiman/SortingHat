@@ -76,7 +76,7 @@ scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
 
 # Apply SelectKBest with chi-squared test
-k = 4
+k = 5
 select_k_best = SelectKBest(score_func=chi2, k=k)
 X_new = select_k_best.fit_transform(X_scaled, y.values.ravel())
 
@@ -87,7 +87,7 @@ selected_feature_names = feature_names[selected_features]
 
 # Apply RFE
 model = LogisticRegression(max_iter=1000)
-rfe = RFE(model, n_features_to_select=4)
+rfe = RFE(model, n_features_to_select=5)
 rfe.fit(X_new, y.values.ravel())
 
 # Get the selected features from RFE
