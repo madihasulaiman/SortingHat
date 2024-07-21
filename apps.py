@@ -13,16 +13,34 @@ data_set = pd.read_csv("hogwarts_dataset.csv")
 
 # Mapping dictionaries
 personality_traits_mapping = {"Openness": 0, "Conscientiousness": 1, "Agreeableness": 2, "Extraversion": 3, "Neuroticism": 4}
-behavioural_traits_mapping = {"Risk-Taking: Assesses the student's willingness to take risks and try new things.": 0, "Collaboration: Measures the student's ability to work effectively with others.": 1, "Discipline: Evaluates the student's self-control and adherence to rules and schedules.": 2, "Independence: Gauges the student's ability to work autonomously and make decisions on their own.": 3}
-hobbies_mapping = {"Physical (e.g., active hobbies like dancing, yoga, hiking, sports, gardening, martial arts, singing)": 0, "Cerebral (e.g., activities like sudoku, reading, and puzzles can help another part of our minds by activating our concentration)": 1, "Creative (e.g., activities like writing, painting, singing, or cooking may provide a sense of accomplishment)": 2, "Community activities (e.g., volunteering, tutoring, helping people)": 3, "Collecting (e.g., coin /stamp collectors)": 4, "Making & Tinkering (e.g., self-motivated projects like building new things, self-restoration, and repairing stuff)": 5}
+behavioural_traits_mapping = {
+    "Risk-Taking: Assesses the student's willingness to take risks and try new things.": 0,
+    "Collaboration: Measures the student's ability to work effectively with others.": 1,
+    "Discipline: Evaluates the student's self-control and adherence to rules and schedules.": 2,
+    "Independence: Gauges the student's ability to work autonomously and make decisions on their own.": 3
+}
+hobbies_mapping = {
+    "Physical (e.g., active hobbies like dancing, yoga, hiking, sports, gardening, martial arts, singing)": 0,
+    "Cerebral (e.g., activities like sudoku, reading, and puzzles can help another part of our minds by activating our concentration)": 1,
+    "Creative (e.g., activities like writing, painting, singing, or cooking may provide a sense of accomplishment)": 2,
+    "Community activities (e.g., volunteering, tutoring, helping people)": 3,
+    "Collecting (e.g., coin/stamp collectors)": 4,
+    "Making & Tinkering (e.g., self-motivated projects like building new things, self-restoration, and repairing stuff)": 5
+}
 academic_mapping = {"1st Class": 0, "2nd Class": 1, "3rd Class": 2}
 hometown_mapping = {"South": 0, "North": 1, "West": 2, "East": 3, "Borneo": 4}
 inasis_mapping = {"Laluan A": 0, "Laluan B": 1, "Laluan C": 2, "Laluan D": 3, "Laluan E": 4, "Laluan F": 5, "Other": 6}
 leadership_mapping = {"No": 0, "Yes": 1}
-cocuriculum_mapping = {"Arts & Culture": 0, "Leadership & Volunteerism": 1, "Sports": 2, "Uniform": 3, "Martial Arts": 4, "Academic & Clubs": 5, "Others": 6}
+cocuriculum_mapping = {
+    "Arts & Culture": 0, "Leadership & Volunteerism": 1, "Sports": 2, "Uniform": 3,
+    "Martial Arts": 4, "Academic & Clubs": 5, "Others": 6
+}
 fav_cuisine_mapping = {"Malay": 0, "Chinese": 1, "Indian": 2, "Western": 3, "Japanese": 4, "Korean": 5, "Thai": 6, "Exotic": 7}
 income_mapping = {"t20": 0, "m40": 1, "b40": 2}
-faculty_mapping = {"SOC": 1, "SEFB": 2, "SBM": 3, "SOB": 4, "SOE": 5, "TISSA": 6, "SOL": 7, "SOG": 8, "STML": 9, "IBS": 10, "STHEM": 11, "SQS": 12, "SOIS": 13, "SMMTC": 14}
+faculty_mapping = {
+    "SOC": 1, "SEFB": 2, "SBM": 3, "SOB": 4, "SOE": 5, "TISSA": 6, "SOL": 7,
+    "SOG": 8, "STML": 9, "IBS": 10, "STHEM": 11, "SQS": 12, "SOIS": 13, "SMMTC": 14
+}
 
 # Data encoding
 data_set['Personality Traits'] = data_set['Personality Traits'].map(personality_traits_mapping)
@@ -131,6 +149,6 @@ input_data = [
 if st.button("Predict House"):
     if None not in input_data:
         final_house, percent_votes = predict_house(input_data)
-        st.write(f"The new data is classified into '{final_house}' house with {percent_votes:.2f}% votes.")
+        st.write(f"You belong to {final_house} house with {percent_votes:.2f}% confidence!")
     else:
-        st.error("Please fill in all the fields.")
+        st.write("Please fill in all fields to get a prediction.")
